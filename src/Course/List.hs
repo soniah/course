@@ -147,8 +147,8 @@ filter ::
   (a -> Bool)
   -> List a
   -> List a
-filter =
-  error "todo: Course.List#filter"
+filter f =
+  foldRight (\a b -> if (f a) then a :. b else b) Nil
 
 -- | Append two lists to a new list.
 --
