@@ -130,8 +130,8 @@ map ::
   (a -> b)
   -> List a
   -> List b
-map =
-  error "todo: Course.List#map"
+map _ Nil = Nil
+map f (t1 :. t2) = (f t1) :. (map f t2)
 
 -- | Return elements satisfying the given predicate.
 --
