@@ -267,8 +267,9 @@ find ::
   -> List a
   -> Optional a
 find f =
-  foldRight g Empty where
-    g p q = if f p then (Full p) else q
+  foldRight ((\ f' p q -> if f' p then (Full p) else q) f) Empty
+-- foldRight g Empty where
+--   g p q = if f p then (Full p) else q
 
 -- | Determine if the length of the given list is greater than 4.
 --
