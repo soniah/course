@@ -22,20 +22,25 @@ bindOptional :: (a -> Optional b) -> Optional a -> Optional b
 bindOptional _ Empty    = Empty
 bindOptional f (Full a) = f a
 
+-- sonia: 'default value if empty, extract from monad'
 (??) :: Optional a -> a -> a
 Empty ?? d  = d
 Full a ?? _ = a
 
+-- sonia: 'default value if empty, keep in optional monad'
 (<+>) :: Optional a -> Optional a -> Optional a
 Empty <+> o = o
 k <+> _     = k
 
+-- sonia: 'map, but function is in optional monad??'
 applyOptional :: Optional (a -> b) -> Optional a -> Optional b
 applyOptional f a = bindOptional (\f' -> mapOptional (\a' -> f' a') a) f
 
+-- sonia: 'bare function of 2 arguments, lift to 2 (optional wrapped) inputs'
 twiceOptional :: (a -> b -> c) -> Optional a -> Optional b -> Optional c
 twiceOptional f = applyOptional . mapOptional f
 
+-- sonia: 'is first arg in second (Optional wrapped) arg?'
 contains :: Eq a => a -> Optional a -> Bool
 contains _ Empty = False
 contains a (Full z) = a == z
