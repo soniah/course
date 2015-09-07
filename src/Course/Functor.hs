@@ -41,8 +41,9 @@ instance Functor Id where
     (a -> b)
     -> Id a
     -> Id b
-  (<$>) =
-    error "todo: Course.Functor (<$>)#instance Id"
+  (<$>) f (Id x) = Id (f x) -- duh! same as definition of mapId
+-- >> (+1) <$> (Id 2)
+-- Id 3
 
 -- | Maps a function on the List functor.
 --
