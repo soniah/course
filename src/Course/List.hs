@@ -287,8 +287,10 @@ find f =
 lengthGT4 ::
   List a
   -> Bool
-lengthGT4 =
-  error "todo: Course.List#lengthGT4"
+lengthGT4 x = go 0 x where
+  go 5 _ = True
+  go _ Nil = False
+  go n (_ :. q) = go (n+1) q
 
 -- | Reverse a list.
 --
