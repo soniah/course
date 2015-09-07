@@ -306,8 +306,8 @@ lengthGT4 x = go 0 x where
 reverse ::
   List a
   -> List a
-reverse =
-  error "todo: Course.List#reverse"
+reverse = foldLeft f Nil where
+  f xs x = x :. xs  -- List a -> a -> List a
 
 -- | Produce an infinite `List` that seeds with the given value at its head,
 -- then runs the given function for subsequent elements
