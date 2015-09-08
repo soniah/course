@@ -18,6 +18,7 @@ mapOptional :: (a -> b) -> Optional a -> Optional b
 mapOptional _ Empty    = Empty
 mapOptional f (Full a) = Full (f a)
 
+-- sonia: flipped version of >>= ie monad bind
 bindOptional :: (a -> Optional b) -> Optional a -> Optional b
 bindOptional _ Empty    = Empty
 bindOptional f (Full a) = f a
