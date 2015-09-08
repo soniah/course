@@ -119,8 +119,9 @@ void ::
   Functor f =>
   f a
   -> f ()
-void =
-  error "todo: Course.Functor#void"
+-- (<$>) :: (a -> b) -> f a -> f b
+void x = (<$>) (\ _ -> ()) x
+-- soln: use (<$) 'anonymous map'
 
 -----------------------
 -- SUPPORT LIBRARIES --
