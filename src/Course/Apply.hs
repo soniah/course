@@ -67,8 +67,9 @@ instance Apply Optional where
     Optional (a -> b)
     -> Optional a
     -> Optional b
-  (<*>) =
-    error "todo: Course.Apply (<*>)#instance Optional"
+  (<*>) = applyOptional
+-- or:
+-- f <*> a = bindOptional (`mapOptional` a) f
 
 -- | Implement @Apply@ instance for reader.
 --
