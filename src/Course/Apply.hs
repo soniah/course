@@ -36,7 +36,7 @@ instance Apply Id where
     -> Id a
     -> Id b
   (<*>) (Id fn) = (<$>) fn
--- (<$>) :: (a -> b) -> f a -> f b
+-- (<$>) :: (a -> b) -> f a -> f b   "fmap"
 -- or
 -- Id f <*> Id a = Id (f a)
 
