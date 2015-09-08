@@ -84,8 +84,7 @@ instance Functor ((->) t) where
     (a -> b)
     -> ((->) t a)
     -> ((->) t b)
-  (<$>) =
-    error "todo: Course.Functor (<$>)#((->) t)"
+  (<$>) f x = f . x
 
 -- | Anonymous map. Maps a constant value on a functor.
 --
