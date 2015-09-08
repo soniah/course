@@ -19,10 +19,7 @@ import qualified Prelude as P
 --   `∀a b c. ((.) <$> a <*> b <*> c) ≅ (a <*> (b <*> c))`
 class Functor f => Apply f where
   -- Pronounced apply.
-  (<*>) ::
-    f (a -> b)
-    -> f a
-    -> f b
+  (<*>) :: f (a -> b) -> f a -> f b
 
 infixl 4 <*>
 
@@ -120,8 +117,16 @@ lift2 ::
   -> f a
   -> f b
   -> f c
-lift2 =
-  error "todo: Course.Apply#lift2"
+lift2 fn f1 f2 = fn <$> f1 <*> f2
+
+-- Notes:
+-- (<$>) :: (a -> b) -> f a -> f b   "fmap"
+-- (<*>) :: f (a -> b) -> f a -> f b 'apply'
+-- <$> takes a 'plain' function and makes it work in a 'container'.
+-- `<$>` `+` gives `+` that works in a container.
+-- `<$>` `+` f1 gives a 'partial +' eg (+1) that works in a container
+-- `<*>` takes a 'container function' and container value (f b) and returns fc
+-- (b and c from lift2's signature, not <*>'s)
 
 -- | Apply a ternary function in the environment.
 --
