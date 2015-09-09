@@ -174,8 +174,13 @@ filtering ::
   (a -> f Bool)
   -> List a
   -> f (List a)
-filtering =
-  error "todo: Course.Applicative#filtering"
+filtering p = foldRight (\x acc -> lift3 doit (p x) (pure x) acc) (pure Nil) where
+  doit b x' acc' = if b then x' :. acc' else acc'
+
+-- (<$>) :: Apply f => (a -> b) -> f a -> f b   "fmap"
+-- lift2 :: Apply f => (a -> b -> c) -> f a -> f b -> f c
+-- <$>, lift2, lift3 are all the same "family"
+-- again: use the abstraction to use normal functions
 
 -----------------------
 -- SUPPORT LIBRARIES --
