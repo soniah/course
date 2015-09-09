@@ -55,8 +55,7 @@ instance Applicative Id where
   pure ::
     a
     -> Id a
-  pure =
-    error "todo: Course.Applicative pure#instance Id"
+  pure = Id
 
 -- | Insert into a List.
 --
