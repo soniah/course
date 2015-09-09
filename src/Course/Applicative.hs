@@ -84,8 +84,7 @@ instance Applicative ((->) t) where
   pure ::
     a
     -> ((->) t a)
-  pure =
-    error "todo: Course.Applicative pure#((->) t)"
+  pure x _ = x -- ie const
 
 -- | Sequences a list of structures to a structure of list.
 --
