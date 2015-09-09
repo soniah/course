@@ -74,8 +74,8 @@ instance Applicative Optional where
   pure ::
     a
     -> Optional a
-  pure =
-    error "todo: Course.Applicative pure#instance Optional"
+  pure a =
+    Full a
 
 -- | Insert into a constant function.
 --
