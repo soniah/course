@@ -243,8 +243,7 @@ lift4 fn w x y z = fn <$> w <*> x <*> y <*> z
   f b
   -> f a
   -> f b
-(<*) =
-  error "todo: Course.Apply#(<*)"
+(<*) fa fb = const <$> fa <*> fb -- or "lift2 const"
 
 -----------------------
 -- SUPPORT LIBRARIES --
