@@ -189,8 +189,7 @@ lift4 ::
   -> f c
   -> f d
   -> f e
-lift4 =
-  error "todo: Course.Apply#lift4"
+lift4 fn w x y z = fn <$> w <*> x <*> y <*> z
 
 -- | Sequence, discarding the value of the first argument.
 -- Pronounced, right apply.
