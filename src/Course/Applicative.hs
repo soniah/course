@@ -106,8 +106,23 @@ sequence ::
   Applicative f =>
   List (f a)
   -> f (List a)
-sequence =
-  error "todo: Course.Applicative#sequence"
+sequence xs =
+  foldRight (\x acc -> lift2 (:.) x acc) (pure Nil) xs
+
+-- lesson: use normal functions/ideas, but combine
+-- into abstraction - that's part of the point of
+-- (Applicative) Functors.
+--
+-- _x :: f a -> f (List a) -> f (List a)
+-- _y :: f (List a)
+
+-- foldright of <$> of anon function?
+-- (*>) fa fb = (\ _ y -> y) <$> fa <*> fb
+-- foldRight :: (a -> b -> b) -> b -> List a -> b
+
+-- (<$>) :: (a -> b) -> f a -> f b   "fmap"
+-- (<*>) :: f (a -> b) -> f a -> f b 'apply'
+-- pure  :: a -> f a
 
 -- | Replicate an effect a given number of times.
 --
