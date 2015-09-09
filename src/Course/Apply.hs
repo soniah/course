@@ -214,8 +214,11 @@ lift4 fn w x y z = fn <$> w <*> x <*> y <*> z
   f a
   -> f b
   -> f b
-(*>) =
-  error "todo: Course.Apply#(*>)"
+(*>) fa fb = (\ _ y -> y) <$> fa <*> fb
+
+-- Notes:
+-- (<$>) :: (a -> b) -> f a -> f b   "fmap"
+-- (<*>) :: f (a -> b) -> f a -> f b 'apply'
 
 -- | Sequence, discarding the value of the second argument.
 -- Pronounced, left apply.
