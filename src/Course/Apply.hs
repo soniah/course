@@ -157,8 +157,7 @@ lift3 ::
   -> f b
   -> f c
   -> f d
-lift3 =
-  error "todo: Course.Apply#lift2"
+lift3 fn x y z = fn <$> x <*> y <*> z
 
 -- | Apply a quaternary function in the environment.
 --
