@@ -124,6 +124,7 @@ sequence xs =
 -- (<*>) :: f (a -> b) -> f a -> f b 'apply'
 -- pure  :: a -> f a
 
+
 -- | Replicate an effect a given number of times.
 --
 -- >>> replicateA 4 (Id "hi")
@@ -145,8 +146,8 @@ replicateA ::
   Int
   -> f a
   -> f (List a)
-replicateA =
-  error "todo: Course.Applicative#replicateA"
+replicateA n a =
+  replicate n <$> a -- "sequence . replicate n" answer is nicer
 
 -- | Filter a list with a predicate that produces an effect.
 --
