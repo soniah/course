@@ -167,8 +167,11 @@ join = (=<<) id
   f a
   -> (a -> f b)
   -> f b
-(>>=) =
-  flip (=<<)
+fa >>= fn = join (fn <$> fa)
+
+-- fmap followed by flatten
+-- join :: Bind f => f (f a) -> f a (ie 'flatten')
+-- (<$>) :: Apply f => (a -> b) -> f a -> f b   "fmap"
 
 infixl 1 >>=
 
