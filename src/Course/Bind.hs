@@ -87,6 +87,12 @@ instance Bind Id where
   (=<<) =
     error "todo: Course.Bind (=<<)#instance Id"
 
+-- all things with (=<<) and (<$>) also have (<*>).
+-- (<$>) :: Apply f => (a -> b) -> f a -> f b   "fmap"
+-- (<*>) :: Bind f => f (a -> b) -> f a -> f b
+
+-- (=<<) :: (a -> f b) -> f a -> f b
+
 -- | Binds a function on a List.
 --
 -- >>> (\n -> n :. n :. Nil) =<< (1 :. 2 :. 3 :. Nil)
