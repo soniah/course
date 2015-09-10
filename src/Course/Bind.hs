@@ -84,8 +84,7 @@ instance Bind Id where
     (a -> Id b)
     -> Id a
     -> Id b
-  (=<<) =
-    error "todo: Course.Bind (=<<)#instance Id"
+  f =<< Id a = f a
 
 -- all things with (=<<) and (<$>) also have (<*>).
 -- (<$>) :: Apply f => (a -> b) -> f a -> f b   "fmap"
