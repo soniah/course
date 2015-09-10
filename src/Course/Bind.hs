@@ -24,7 +24,7 @@ import qualified Prelude as P
 -- * The law of associativity
 --   `∀f g x. g =<< (f =<< x) ≅ ((g =<<) . f) =<< x`
 class Apply f => Bind f where
-  -- Pronounced, bind.
+  -- Pronounced, bind. (sonia: or also 'flatmap')
   (=<<) :: (a -> f b) -> f a -> f b
 
 infixr 1 =<<
@@ -145,8 +145,16 @@ join ::
   Bind f =>
   f (f a)
   -> f a
-join =
-  error "todo: Course.Bind#join"
+join = (=<<) id
+
+-- list flatten is:
+-- flatten = foldRight (++) Nil -- and ++ done using patterns
+-- flatMap (ie bind) with id
+
+-- all things with (=<<) and (<$>) also have (<*>).
+-- (<$>) :: Apply f => (a -> b) -> f a -> f b   "fmap"
+-- (<*>) :: Bind f => f (a -> b) -> f a -> f b
+-- (=<<) :: (a -> f b) -> f a -> f b
 
 -- | Implement a flipped version of @(=<<)@, however, use only
 -- @join@ and @(<$>)@.
