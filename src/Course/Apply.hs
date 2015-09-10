@@ -46,8 +46,8 @@ instance Apply List where
     List (a -> b)
     -> List a
     -> List b
-  (<*>) =
-    error "todo: Course.Apply (<*>)#instance List"
+  f <*> a =
+    flatMap (`map` a) f
 
 -- | Implement @Apply@ instance for @Optional@.
 --
@@ -89,8 +89,8 @@ instance Apply ((->) t) where
     ((->) t (a -> b))
     -> ((->) t a)
     -> ((->) t b)
-  (<*>) =
-    error "todo: Course.Apply (<*>)#instance ((->) t)"
+  f <*> g =
+    \x -> f x (g x)
 
 -- | Apply a binary function in the environment.
 --
