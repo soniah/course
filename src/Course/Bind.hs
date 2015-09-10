@@ -101,8 +101,7 @@ instance Bind List where
     (a -> List b)
     -> List a
     -> List b
-  (=<<) =
-    error "todo: Course.Bind (=<<)#instance List"
+  f =<< xs = foldRight (\x acc -> (f x) ++ acc) Nil xs
 
 -- | Binds a function on an Optional.
 --
