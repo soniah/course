@@ -189,6 +189,8 @@ infixl 1 >>=
 (<=<) =
   error "todo: Course.Bind#(<=<)"
 
+-- f2 of a (param 3) followed by bind flipped followed by f1
+
 infixr 1 <=<
 
 -----------------------
