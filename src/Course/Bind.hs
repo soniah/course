@@ -123,8 +123,10 @@ instance Bind ((->) t) where
     (a -> ((->) t b))
     -> ((->) t a)
     -> ((->) t b)
-  (=<<) =
-    error "todo: Course.Bind (=<<)#instance ((->) t)"
+  (f =<< g) t' = f (g t') t'
+
+-- type signature for (=<<) :: (a -> t -> b) -> (t -> a) -> t -> b
+--                                   f             g        t'      --
 
 -- | Flattens a combined structure to a single structure.
 --
