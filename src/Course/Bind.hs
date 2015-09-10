@@ -25,10 +25,7 @@ import qualified Prelude as P
 --   `∀f g x. g =<< (f =<< x) ≅ ((g =<<) . f) =<< x`
 class Apply f => Bind f where
   -- Pronounced, bind.
-  (=<<) ::
-    (a -> f b)
-    -> f a
-    -> f b
+  (=<<) :: (a -> f b) -> f a -> f b
 
 infixr 1 =<<
 
@@ -68,8 +65,13 @@ infixr 1 =<<
   f (a -> b)
   -> f a
   -> f b
-(<*>) =
-  error "todo: Course.Bind#(<*>)"
+f <*> a = (<$> a) =<< f -- ???
+
+-- all things with (=<<) and (<$>) also have (<*>).
+-- (<$>) :: Apply f => (a -> b) -> f a -> f b   "fmap"
+-- (=<<) :: (a -> f b) -> f a -> f b
+
+-- (<*>) :: Bind f => f (a -> b) -> f a -> f b
 
 infixl 4 <*>
 
