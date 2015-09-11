@@ -94,11 +94,12 @@ run mainFilePath = do
   (_, mainFileLines) <- getFile mainFilePath
   putStrLn mainFileLines -- place holder
 
+-- sequence :: Applicative f =>
+-- List (f a) -> f (List a)
 getFiles ::
   List FilePath
   -> IO (List (FilePath, Chars))
-getFiles =
-  error "todo: Course.FileIO#getFiles"
+getFiles paths = sequence (map getFile paths)
 
 getFile ::
   FilePath
