@@ -80,7 +80,6 @@ main ::
 main = do
   lc <- getArgs
   let (hd :. _) = lc
-  putStrLn hd
   run hd
 
 type FilePath =
@@ -92,7 +91,7 @@ run ::
   -> IO ()
 run mainFilePath = do
   (_, mainFileLines) <- getFile mainFilePath
-  putStrLn mainFileLines -- place holder
+  printFile mainFilePath mainFileLines -- place holder
 
 -- sequence :: Applicative f =>
 -- List (f a) -> f (List a)
@@ -118,6 +117,6 @@ printFile ::
   FilePath
   -> Chars
   -> IO ()
-printFile =
-  error "todo: Course.FileIO#printFile"
-
+printFile filePath chars = do
+  putStrLn $ (replicate 12 '=') ++ (' ' :. filePath)
+  putStrLn chars
