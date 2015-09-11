@@ -100,12 +100,12 @@ getFiles ::
 getFiles =
   error "todo: Course.FileIO#getFiles"
 
--- TODO next
 getFile ::
   FilePath
   -> IO (FilePath, Chars)
-getFile =
-  error "todo: Course.FileIO#getFile"
+getFile filePath = do
+  chars <- readFile filePath
+  return (filePath, chars)
 
 printFiles ::
   List (FilePath, Chars)
