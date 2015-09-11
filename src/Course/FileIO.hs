@@ -110,8 +110,12 @@ getFile filePath = do
 printFiles ::
   List (FilePath, Chars)
   -> IO ()
-printFiles =
-  error "todo: Course.FileIO#printFiles"
+printFiles x = void (sequence (map printFileTuple x))
+
+printFileTuple ::
+  (FilePath, Chars)
+  -> IO ()
+printFileTuple (fp, cs) = printFile fp cs
 
 printFile ::
   FilePath
