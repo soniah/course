@@ -62,8 +62,11 @@ the contents of c
 -- /Tip:/ use @getArgs@ and @run@
 main ::
   IO ()
-main =
-  error "todo: Course.FileIO#main"
+main = do
+  lc <- getArgs
+  let (hd :. _) = lc
+  putStrLn hd
+  run hd
 
 type FilePath =
   Chars
@@ -74,6 +77,11 @@ run ::
   -> IO ()
 run =
   error "todo: Course.FileIO#run"
+
+-- (<$>) :: (a -> b) -> f a -> f b   "fmap"
+-- (<*>) :: f (a -> b) -> f a -> f b "apply"
+-- (=<<) :: (a -> f b) -> f a -> f b "bind" (flatmap?)
+-- (>>=) :: f a -> (a -> f b) -> f b "bind flipped"
 
 getFiles ::
   List FilePath
