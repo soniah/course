@@ -21,6 +21,7 @@ Useful Functions --
   readFile :: Chars -> IO Chars
   lines :: Chars -> List Chars
   void :: IO a -> IO ()
+  sequence :: List (f a) -> f (List a)
 
 Abstractions --
   Applicative, Monad:
@@ -75,52 +76,35 @@ the contents of c
 -}
 
 -- /Tip:/ use @getArgs@ and @run@
-main ::
-  IO ()
+main :: IO ()
 main = do
   lc <- getArgs
   let (hd :. _) = lc
   run hd
 
-type FilePath =
-  Chars
+type FilePath = Chars
 
 -- /Tip:/ Use @getFiles@ and @printFiles@.
-run ::
-  Chars
-  -> IO ()
+run :: Chars -> IO ()
 run mainFilePath = do
   (_, mainFileLines) <- getFile mainFilePath
   printFile mainFilePath mainFileLines -- place holder
 
--- sequence :: Applicative f =>
--- List (f a) -> f (List a)
-getFiles ::
-  List FilePath
-  -> IO (List (FilePath, Chars))
+getFiles :: List FilePath -> IO (List (FilePath, Chars))
 getFiles paths = sequence (map getFile paths)
 
-getFile ::
-  FilePath
-  -> IO (FilePath, Chars)
+getFile :: FilePath -> IO (FilePath, Chars)
 getFile filePath = do
   chars <- readFile filePath
   return (filePath, chars)
 
-printFiles ::
-  List (FilePath, Chars)
-  -> IO ()
+printFiles :: List (FilePath, Chars) -> IO ()
 printFiles x = void (sequence (map printFileTuple x))
 
-printFileTuple ::
-  (FilePath, Chars)
-  -> IO ()
+printFileTuple :: (FilePath, Chars) -> IO ()
 printFileTuple (fp, cs) = printFile fp cs
 
-printFile ::
-  FilePath
-  -> Chars
-  -> IO ()
+printFile :: FilePath -> Chars -> IO ()
 printFile filePath chars = do
   putStrLn $ (replicate 12 '=') ++ (' ' :. filePath)
   putStrLn chars
