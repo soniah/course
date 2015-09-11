@@ -27,6 +27,21 @@ Abstractions --
 
     <$>, <*>, >>=, =<<, pure
 
+   (<$>) :: (a -> b) -> f a -> f b   "fmap"
+   (<*>) :: f (a -> b) -> f a -> f b "apply"
+   (>>=) :: f a -> (a -> f b) -> f b "bind flipped"
+   (=<<) :: (a -> f b) -> f a -> f b "bind" (flatmap?)
+   pure  :: a -> fa
+   (>>)  :: f a -> f b -> f b
+
+   f >> g
+   do f
+      g
+
+   f >>= (\x -> g x)
+   do x <- f
+      g
+
 Problem --
   Given a single argument of a file name, read that file,
   each line of that file contains the name of another file,
@@ -77,11 +92,6 @@ run ::
   -> IO ()
 run =
   error "todo: Course.FileIO#run"
-
--- (<$>) :: (a -> b) -> f a -> f b   "fmap"
--- (<*>) :: f (a -> b) -> f a -> f b "apply"
--- (=<<) :: (a -> f b) -> f a -> f b "bind" (flatmap?)
--- (>>=) :: f a -> (a -> f b) -> f b "bind flipped"
 
 getFiles ::
   List FilePath
