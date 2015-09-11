@@ -75,7 +75,6 @@ the contents of c
 
 -}
 
--- /Tip:/ use @getArgs@ and @run@
 main :: IO ()
 main = do
   lc <- getArgs
@@ -84,14 +83,15 @@ main = do
 
 type FilePath = Chars
 
--- /Tip:/ Use @getFiles@ and @printFiles@.
 run :: Chars -> IO ()
 run mainFilePath = do
   (_, mainFileLines) <- getFile mainFilePath
-  printFile mainFilePath mainFileLines -- place holder
+  let files = lines mainFileLines
+  contents <- getFiles files
+  printFiles contents
 
 getFiles :: List FilePath -> IO (List (FilePath, Chars))
-getFiles paths = sequence (map getFile paths)
+getFiles paths = sequence $ map getFile paths
 
 getFile :: FilePath -> IO (FilePath, Chars)
 getFile filePath = do
@@ -99,10 +99,7 @@ getFile filePath = do
   return (filePath, chars)
 
 printFiles :: List (FilePath, Chars) -> IO ()
-printFiles x = void (sequence (map printFileTuple x))
-
-printFileTuple :: (FilePath, Chars) -> IO ()
-printFileTuple (fp, cs) = printFile fp cs
+printFiles x = void $ sequence $ map (\(fp,cs) -> printFile fp cs) x
 
 printFile :: FilePath -> Chars -> IO ()
 printFile filePath chars = do
