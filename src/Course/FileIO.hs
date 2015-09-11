@@ -90,8 +90,9 @@ type FilePath =
 run ::
   Chars
   -> IO ()
-run =
-  error "todo: Course.FileIO#run"
+run mainFilePath = do
+  (_, mainFileLines) <- getFile mainFilePath
+  putStrLn mainFileLines -- place holder
 
 getFiles ::
   List FilePath
@@ -99,6 +100,7 @@ getFiles ::
 getFiles =
   error "todo: Course.FileIO#getFiles"
 
+-- TODO next
 getFile ::
   FilePath
   -> IO (FilePath, Chars)
