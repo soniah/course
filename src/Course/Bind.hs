@@ -186,10 +186,14 @@ infixl 1 >>=
   -> (a -> f b)
   -> a
   -> f c
-(<=<) =
-  error "todo: Course.Bind#(<=<)"
+(<=<) g h x = g =<< (h x)
 
 -- f2 of a (param 3) followed by bind flipped followed by f1
+
+-- (<$>) :: (a -> b) -> f a -> f b   "fmap"
+-- (<*>) :: f (a -> b) -> f a -> f b "apply"
+-- (=<<) :: (a -> f b) -> f a -> f b "bind" (flatmap?)
+-- (>>=) :: f a -> (a -> f b) -> f b "bind flipped"
 
 infixr 1 <=<
 
