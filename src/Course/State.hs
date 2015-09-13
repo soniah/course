@@ -82,8 +82,18 @@ instance Bind (State s) where
     (a -> State s b)
     -> State s a
     -> State s b
-  (=<<) =
-    error "todo: Course.State (=<<)#instance (State s)"
+  f =<< State g =
+    State (\s ->
+      let (a1,s1) = g s
+          State h = f a1
+          (b1,s2) = h s1
+      in  (b1,s2))
+-- f =<< State k =
+--   State (\s -> let (a, t) = k s in runState (f a) t)
+
+-- f :: a -> State s b
+-- g :: s -> (a, s)
+-- h :: s -> (b, s)
 
 instance Monad (State s) where
 
