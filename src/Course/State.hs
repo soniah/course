@@ -55,9 +55,14 @@ instance Apply (State s) where
   (<*>) ::
     State s (a -> b)
     -> State s a
-    -> State s b 
-  (<*>) =
-    error "todo: Course.State (<*>)#instance (State s)"
+    -> State s b
+  State f <*> State g =
+    State (\s ->  let (f1,s1) = f s
+                      (a1,s2) = g s1
+                  in (f1 a1,s2))
+
+-- f :: s -> (a -> b, s)
+-- g :: s -> (a, s)
 
 -- | Implement the `Applicative` instance for `State s`.
 -- >>> runState (pure 2) 0
