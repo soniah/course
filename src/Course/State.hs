@@ -125,7 +125,7 @@ eval (State f) =
 get ::
   State s s
 get =
-  error "todo: Course.State#get"
+  State (\s -> (s, s))
 
 -- | A `State` where the resulting state is seeded with the given value.
 --
@@ -135,7 +135,7 @@ put ::
   s
   -> State s ()
 put =
-  error "todo: Course.State#put"
+  State . const . (,) () -- ??
 
 -- | Find the first element in a `List` that satisfies a given predicate.
 -- It is possible that no element is found, hence an `Optional` result.
