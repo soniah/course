@@ -104,8 +104,9 @@ exec ::
   State s a
   -> s
   -> s
-exec =
-  error "todo: Course.State#exec"
+exec (State f) s =
+  let (_,s1) = f s
+  in  s1 -- ie "snd . f" and no "s" param (point free)
 
 -- | Run the `State` seeded with `s` and retrieve the resulting value.
 --
