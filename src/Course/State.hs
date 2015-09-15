@@ -134,8 +134,8 @@ get =
 put ::
   s
   -> State s ()
-put =
-  State . const . (,) () -- ??
+put s' = State (\_ -> ((),s'))
+-- State . const . (,) () -- solution - ??
 
 -- | Find the first element in a `List` that satisfies a given predicate.
 -- It is possible that no element is found, hence an `Optional` result.
