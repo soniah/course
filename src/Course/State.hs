@@ -156,8 +156,15 @@ findM ::
   (a -> f Bool)
   -> List a
   -> f (Optional a)
-findM =
-  error "todo: Course.State#findM"
+findM _ Nil = pure Empty
+-- play with bind
+-- (>>=) :: m a -> (a -> m b) -> m b
+-- (=<<) :: (a -> m b) -> m a -> m b
+findM fn (x :. xs) =
+  fn x >>= (\bool ->
+    if bool
+      then pure (Full x)
+      else (findM fn xs))
 
 -- | Find the first element in a `List` that repeats.
 -- It is possible that no element repeats, hence an `Optional` result.
