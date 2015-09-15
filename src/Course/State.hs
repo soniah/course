@@ -61,6 +61,19 @@ instance Apply (State s) where
                       (a1,s2) = g s1
                   in (f1 a1,s2))
 
+
+{-
+-- label a tree with ascending integers
+label :: Tree a -> State Int (Tree (Int,a))
+label Left = pure Leaf
+label (Bin a l r) = Bin <$> (get >>= \x -> put (x + 1) >> return (x,a))
+                                    :: State Int (Tree (Int,a) -> (Tree (Int,a) -> Tree (Int,a)))
+                        <*> label l :: State Int (Tree (Int,a))
+                        <*> label r :: State Int (Tree (Int,a)
+-}
+
+
+
 -- f :: s -> (a -> b, s)
 -- g :: s -> (a, s)
 
