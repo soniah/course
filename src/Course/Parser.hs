@@ -160,11 +160,7 @@ bindParser ::
 bindParser f (P p) =
   P (\i -> case p i of
       ErrorResult er  -> ErrorResult er
-      Result i' a' ->
-        let (P pb) = f a'
-        in case pb i' of
-          ErrorResult er'  -> ErrorResult er'
-          Result i'' b' -> Result i'' b'
+      Result i' a' ->  parse (f a') i'
   )
 
 -- | This is @bindParser@ with the arguments flipped.
