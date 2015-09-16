@@ -217,8 +217,11 @@ flbindParser =
   Parser a
   -> Parser a
   -> Parser a
-(|||) =
-  error "todo: Course.Parser#(|||)"
+(|||) (P p1) (P p2) =
+  P (\i -> case p1 i of
+      Result i' a' -> Result i' a'
+      ErrorResult _ -> parse (P p2) i
+    )
 
 infixl 3 |||
 
