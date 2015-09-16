@@ -268,8 +268,12 @@ list =
 list1 ::
   Parser a
   -> Parser (List a)
-list1 =
-  error "todo: Course.Parser#list1"
+list1 pa =
+  pa `flbindParser` (\c ->
+    list pa `flbindParser` (\cs ->
+        valueParser $ c :. cs
+    )
+  )
 
 -- | Return a parser that produces a character but fails if
 --
