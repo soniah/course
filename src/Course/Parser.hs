@@ -157,8 +157,15 @@ bindParser ::
   (a -> Parser b)
   -> Parser a
   -> Parser b
-bindParser =
-  error "todo: Course.Parser#bindParser"
+bindParser f (P p) =
+  P (\i -> case p i of
+      ErrorResult er  -> ErrorResult er
+      Result i' a' ->
+        let (P pb) = f a'
+        in case pb i' of
+          ErrorResult er'  -> ErrorResult er'
+          Result i'' b' -> Result i'' b'
+  )
 
 -- | This is @bindParser@ with the arguments flipped.
 -- It might be more helpful to use this function if you prefer this argument order.
