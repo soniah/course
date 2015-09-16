@@ -190,8 +190,11 @@ flbindParser =
   Parser a
   -> Parser b
   -> Parser b
-(>>>) =
-  error "todo: Course.Parser#(>>>)"
+(>>>) (P pa) b =
+  P (\i -> case pa i of
+      ErrorResult er -> ErrorResult er
+      Result i' _ -> parse b i'
+    )
 
 -- | Return a parser that tries the first parser for a successful value.
 --
