@@ -287,8 +287,17 @@ list1 =
 satisfy ::
   (Char -> Bool)
   -> Parser Char
-satisfy =
-  error "todo: Course.Parser#satisfy"
+satisfy fn =
+  character `flbindParser` (\c ->
+    if fn c
+      then valueParser c
+      else unexpectedCharParser c
+  )
+
+-- character :: Parser Char
+-- unexpectedCharParser :: Char -> Parser a
+-- bindParser   :: (a -> Parser b) -> Parser a -> Parser b
+-- flbindParser :: Parser a -> (a -> Parser b) -> Parser b
 
 -- | Return a parser that produces the given character but fails if
 --
