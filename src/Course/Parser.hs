@@ -101,7 +101,10 @@ failed =
 character ::
   Parser Char
 character =
-  error "todo: Course.Parser#character"
+  P (\i -> case i of
+        Nil -> ErrorResult UnexpectedEof
+        (x :. xs) -> Result xs x
+    )
 
 -- | Return a parser that maps any succeeding result with the given function.
 --
