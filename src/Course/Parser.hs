@@ -228,7 +228,7 @@ infixl 3 |||
 -- | Return a parser that continues producing a list of values from the given parser.
 --
 -- /Tip:/ Use @list1@, @valueParser@ and @(|||)@.
---
+--                       ^ "pure" ^
 -- >>> parse (list character) ""
 -- Result >< ""
 --
