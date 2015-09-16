@@ -89,7 +89,7 @@ valueParser a' =
 failed ::
   Parser a
 failed =
-  error "todo: Course.Parser#failed"
+  P (\_ -> ErrorResult Failed)
 
 -- | Return a parser that succeeds with a character off the input or fails with an error if the input is empty.
 --
