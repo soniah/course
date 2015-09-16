@@ -79,8 +79,8 @@ unexpectedCharParser c =
 valueParser ::
   a
   -> Parser a
-valueParser =
-  error "todo: Course.Parser#valueParser"
+valueParser a' =
+  P (\i -> Result i a')
 
 -- | Return a parser that always fails with the given error.
 --
