@@ -547,7 +547,12 @@ smokerParser =
 phoneBodyParser ::
   Parser Chars
 phoneBodyParser =
-  error "todo: Course.Parser#phoneBodyParser"
+  list phoneChars
+
+phoneChars ::
+  Parser Char
+phoneChars =
+  digit ||| is '-' ||| is '.'
 
 -- | Write a parser for Person.phone.
 --
