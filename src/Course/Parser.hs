@@ -431,6 +431,7 @@ sequenceParser (h :. t) =
   sequenceParser t `flbindParser` (\t' ->
   valueParser $ h' :. t'
   )) -- apparently can be done with apply and pure
+     -- or flip2 :. and pure Nil, like before
 
 -- | Return a parser that produces the given number of values off the given parser.
 -- This parser fails if the given parser fails in the attempt to produce the given number of values.
@@ -526,7 +527,7 @@ surnameParser =
 smokerParser ::
   Parser Char
 smokerParser =
-  is 'y' ||| is 'Y' ||| failed
+  is 'y' ||| is 'n'
 
 -- | Write part of a parser for Person#phoneBody.
 -- This parser will only produce a string of digits, dots or hyphens.
@@ -630,10 +631,10 @@ personParser ::
 personParser =
   Person <$>
   ageParser <*>
-  (space >>> firstNameParser) <*>
-  (space >>> surnameParser) <*>
-  (space >>> smokerParser) <*>
-  (space >>> phoneParser)
+  (spaces1 >>> firstNameParser) <*>
+  (spaces1 >>> surnameParser) <*>
+  (spaces1 >>> smokerParser) <*>
+  (spaces1 >>> phoneParser)
 
 {-
   ageParser `flbindParser` (\age' ->
