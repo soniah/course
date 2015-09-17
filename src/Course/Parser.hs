@@ -628,6 +628,14 @@ phoneParser =
 personParser ::
   Parser Person
 personParser =
+  Person <$>
+  ageParser <*>
+  (is ' ' >>> firstNameParser) <*>
+  (is ' ' >>> surnameParser) <*>
+  (is ' ' >>> smokerParser) <*>
+  (is ' ' >>> phoneParser)
+
+{-
   ageParser `flbindParser` (\age' ->
   is ' ' >>>
   firstNameParser `flbindParser` (\firstName' ->
@@ -639,6 +647,7 @@ personParser =
   phoneParser `flbindParser` (\phone' ->
   valueParser $ (Person age' firstName' surname' smoker' phone')
   )))))
+-}
 
 
 -- Make sure all the tests pass!
