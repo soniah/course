@@ -505,8 +505,9 @@ surnameParser ::
 surnameParser =
   upper `flbindParser` (\u' ->
   thisMany 5 lower `flbindParser` (\l' ->
-  valueParser $ u' :. l'
-  ))
+  list lower `flbindParser` (\ls' ->
+  valueParser $ u' :. (l' ++ ls')
+  )))
 
 -- | Write a parser for Person.smoker.
 --
