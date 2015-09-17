@@ -503,7 +503,10 @@ firstNameParser =
 surnameParser ::
   Parser Chars
 surnameParser =
-  error "todo: Course.Parser#surnameParser"
+  upper `flbindParser` (\u' ->
+  thisMany 5 lower `flbindParser` (\l' ->
+  valueParser $ u' :. l'
+  ))
 
 -- | Write a parser for Person.smoker.
 --
