@@ -425,8 +425,12 @@ alpha = satisfy isAlpha
 sequenceParser ::
   List (Parser a)
   -> Parser (List a)
-sequenceParser =
-  error "todo: Course.Parser#sequenceParser"
+sequenceParser Nil = valueParser Nil
+sequenceParser (h :. t) =
+  h `flbindParser` (\h' ->
+  sequenceParser t `flbindParser` (\t' ->
+  valueParser $ h' :. t'
+  )) -- apparently can be done with apply and pure
 
 -- | Return a parser that produces the given number of values off the given parser.
 -- This parser fails if the given parser fails in the attempt to produce the given number of values.
