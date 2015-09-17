@@ -667,6 +667,6 @@ instance Bind Parser where
     -> Parser a
     -> Parser b
   (=<<) =
-    error "todo: Course.Parser (=<<)#instance Parser"
+    bindParser
 
 instance Monad Parser where
