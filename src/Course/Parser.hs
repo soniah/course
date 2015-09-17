@@ -630,10 +630,10 @@ personParser ::
 personParser =
   Person <$>
   ageParser <*>
-  (is ' ' >>> firstNameParser) <*>
-  (is ' ' >>> surnameParser) <*>
-  (is ' ' >>> smokerParser) <*>
-  (is ' ' >>> phoneParser)
+  (space >>> firstNameParser) <*>
+  (space >>> surnameParser) <*>
+  (space >>> smokerParser) <*>
+  (space >>> phoneParser)
 
 {-
   ageParser `flbindParser` (\age' ->
