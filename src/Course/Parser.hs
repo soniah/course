@@ -574,7 +574,11 @@ phoneChars =
 phoneParser ::
   Parser Chars
 phoneParser =
-  error "todo: Course.Parser#phoneParser"
+  digit `flbindParser` (\d' ->
+  phoneBodyParser `flbindParser`(\pb ->
+  is '#' `flbindParser` (\_ ->
+  valueParser $ d' :. pb
+  )))
 
 -- | Write a parser for Person.
 --
