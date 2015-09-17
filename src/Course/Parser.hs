@@ -661,8 +661,8 @@ instance Apply Parser where
     Parser (a -> b)
     -> Parser a
     -> Parser b
-  (<*>) =
-    error "todo: Course.Parser (<*>)#instance Parser"
+  fn <*> pa =
+    fn `flbindParser` (\fn' -> (fn' <$> pa))
 
 -- | Write an Applicative functor instance for a @Parser@.
 instance Applicative Parser where
