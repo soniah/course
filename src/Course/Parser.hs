@@ -293,9 +293,9 @@ satisfy ::
   -> Parser Char
 satisfy fn =
   character `flbindParser` (\c ->
-    if fn c
-      then valueParser c
-      else unexpectedCharParser c
+  if fn c
+    then valueParser c
+    else unexpectedCharParser c
   )
 
 -- character :: Parser Char
