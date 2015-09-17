@@ -481,7 +481,10 @@ ageParser =
 firstNameParser ::
   Parser Chars
 firstNameParser =
-  error "todo: Course.Parser#firstNameParser"
+  upper `flbindParser` (\u' ->
+  list lower `flbindParser` (\l' ->
+  valueParser (u' :. l')
+  ))
 
 -- | Write a parser for Person.surname.
 --
