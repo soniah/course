@@ -347,7 +347,11 @@ digit = satisfy isDigit
 natural ::
   Parser Int
 natural =
-  error "todo: Course.Parser#natural"
+  list1 digit `flbindParser` (\cs ->
+  case read cs of
+    Empty -> failed
+    Full i -> valueParser i
+  )
 
 --
 -- | Return a parser that produces a space character but fails if
