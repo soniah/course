@@ -658,7 +658,7 @@ instance Applicative Parser where
     a
     -> Parser a
   pure =
-    error "todo: Course.Parser pure#instance Parser"
+    valueParser
 
 -- | Write a Bind instance for a @Parser@.
 instance Bind Parser where
