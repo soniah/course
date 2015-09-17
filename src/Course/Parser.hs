@@ -627,7 +627,18 @@ phoneParser =
 personParser ::
   Parser Person
 personParser =
-  error "todo: Course.Parser#personParser"
+  ageParser `flbindParser` (\age' ->
+  is ' ' >>>
+  firstNameParser `flbindParser` (\firstName' ->
+  is ' ' >>>
+  surnameParser `flbindParser` (\surname' ->
+  is ' ' >>>
+  smokerParser `flbindParser` (\smoker' ->
+  is ' ' >>>
+  phoneParser `flbindParser` (\phone' ->
+  valueParser $ (Person age' firstName' surname' smoker' phone')
+  )))))
+
 
 -- Make sure all the tests pass!
 
